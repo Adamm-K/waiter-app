@@ -1,6 +1,7 @@
 import { Col, Row, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
-const TableInfo = ({number, status}) => {
+const TableInfo = ({number, status, id}) => {
   return (
     <Row>
       <Row className="align-items-end mb-3">
@@ -11,7 +12,9 @@ const TableInfo = ({number, status}) => {
           <p className="mb-0 pl-3"><strong>Status:</strong> {status}</p>
         </Col>
         <Col className="col-6 d-flex justify-content-end">
-          <Button variant="primary"  size="sm">Show more</Button>
+          <Link to={"/tables/" + id}>
+            <Button variant="primary"  size="sm">Show more</Button>
+          </Link>
         </Col>
       </Row>
       <hr />
