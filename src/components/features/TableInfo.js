@@ -1,7 +1,27 @@
 import { Col, Row, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import ModalDelete from './ModalDelete';
+import { deleteTableRequest } from '../../redux/tablesRedux';
 
 const TableInfo = ({number, status, id}) => {
+
+  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () =>  setShowModal(true); 
+
+  const handleRemove = e => {  
+    e.preventDefault();
+    dispatch(deleteTableRequest( id ));
+    handleClose();
+  };
+
+  if(showModal) return (
+    <ModalDelete showModal={showModal} handleClose={handleClose} handleRemove={handleRemove} />
+  );
+
   return (
     <Row>
       <Row className="align-items-end mb-3">
@@ -13,8 +33,9 @@ const TableInfo = ({number, status, id}) => {
         </Col>
         <Col className="col-6 d-flex justify-content-end">
           <Link to={"/tables/" + id}>
-            <Button variant="primary"  size="sm">Show more</Button>
+            <Button variant="primary"  size="sm" className="mx-3">Show more</Button>
           </Link>
+          <Button variant="outline-danger" size="sm" onClick={handleShow}>Delete</Button>
         </Col>
       </Row>
       <hr />

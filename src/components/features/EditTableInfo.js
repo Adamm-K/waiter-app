@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { getTableById } from '../../redux/tablesRedux';
 import { Navigate } from 'react-router-dom';
-import { editTable } from '../../redux/tablesRedux';
+import { updateTableRequest } from '../../redux/tablesRedux';
 
 const EditTableInfo = () => {
 
@@ -14,7 +14,7 @@ const EditTableInfo = () => {
   let navigate = useNavigate();
 
   const handleSubmit = table => {
-    dispatch(editTable({ ...table, tableId }));
+    dispatch(updateTableRequest({ ...table }));
     navigate('/');
   };
 
@@ -29,6 +29,7 @@ const EditTableInfo = () => {
       people={tableData.people}
       maxPeople={tableData.maxPeople}
       bill={tableData.bill}
+      tableNumber={tableData.tableNumber}
     />
   );
 };
